@@ -1,0 +1,121 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 5px 30% 0px 30%;
+  /* background-color: rgba(214, 214, 220, 0.858); */
+}
+
+ol, ul {
+  padding-left: 30px;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 80px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 80px;
+}
+
+.color-x {
+  color: coral;
+}
+
+.color-o {
+  color: aqua;
+}
+
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  /* display: flex;
+  flex-direction: row; */
+  border: solid 1px;
+  /* justify-content: center; */
+  /* margin: 0 15% 5% 15%; */
+}
+
+.game-board {
+  margin: 10px 0px 10px 0px;
+}
+
+.square-board {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.game-info {
+  border: solid 1px;
+  /* margin-left: 20px; */
+}
+
+/* Header */
+.header-container {
+  border: 1px solid;
+  background-color: rgba(53, 52, 154, 0.208);
+}
+
+.header-container ul {
+  display: table;
+  margin: 0;
+}
+
+.header-container ul > li {
+  display: table-cell;
+  padding: 8px 15px 8px 15px;
+  /* border: solid; */
+}
+
+.header-container ul > li:hover {
+  background-color: rgb(230, 241, 189);
+  cursor: pointer;
+}
+
+.play-icon:active {
+  background-color: aqua;
+}
+
+/* End of header */
+
+/* Game Info */
+.game-info {
+  list-style: none;
+  /* border: solid; */
+  display: table;
+  width: 100%;
+}
+
+.game-info ol {
+  display: table-cell;
+  list-style: none;
+  width: 50%;
+}
+
+.game-info .winner-info {
+  /* border: solid; */
+  display: table-cell;
+}
