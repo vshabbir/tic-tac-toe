@@ -4,9 +4,10 @@ export function Header(props) {
             <ul>
                 {
                     props.gameStarted ? 
-                    <li className="restart-icon" onClick={() => props.onRestart()}>Restart</li> :
+                    <li className="restart-icon" onClick={() => props.onPause()}>Pause</li> :
                     <li className="play-icon" onClick={() => props.onPlay()}>Play</li>
                 }
+                <li onClick={() => props.onRestart()}>Restart</li>
                 {/* <li>Settings</li>
                 <li>Game History</li> */}
             </ul>
