@@ -16,9 +16,14 @@ export const Setting = (props) => {
 
 export function Square(props) {
     return (
-      <button className={`square ${props.colorClass}`} onClick={(e) => {props.onClick(e)}}>
+      <div className={`square ${props.colorClass} horizontal-line`} onClick={(e) => {props.onClick(e)}}>
+        <span className="square-span">
           {props.value}
-        </button>
+        </span>
+      </div>
+      // <button className={`square ${props.colorClass}`} onClick={(e) => {props.onClick(e)}}>
+      //     {props.value}
+      // </button>
     );
 };
 

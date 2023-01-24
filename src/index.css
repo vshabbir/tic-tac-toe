@@ -34,6 +34,12 @@ ol, ul {
   width: 80px;
 }
 
+.square .square-span {
+  vertical-align: middle;
+  position: relative;
+  top: 20%;
+}
+
 .color-x {
   color: coral;
 }
@@ -118,4 +124,10 @@ ol, ul {
 .game-info .winner-info {
   /* border: solid; */
   display: table-cell;
+}
+
+/* CSS to display winning lines */
+
+.square .horizontal-line {
+  border: solid 1px;
 }
