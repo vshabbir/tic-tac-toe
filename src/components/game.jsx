@@ -59,9 +59,6 @@ class Game extends React.Component {
         if(gameService.calculateWinner(squares) || squares[i]) {
             return;
         }
-        if(e) {
-            e.target.className = `square ${!this.state.xIsNext ? 'color-x' : 'color-o'}`;
-        }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
             history: history.concat([{squares: squares}]),
