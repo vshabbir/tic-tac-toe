@@ -59,6 +59,7 @@ class Game extends React.Component {
         if(gameService.calculateWinner(squares) || squares[i]) {
             return;
         }
+        // Remove dynamic color for X and O. This will be implemented later.
         if(e) {
             e.target.className = `square ${!this.state.xIsNext ? 'color-x' : 'color-o'}`;
         }
