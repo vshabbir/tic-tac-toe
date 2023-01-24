@@ -16,7 +16,7 @@ export const Setting = (props) => {
 
 export function Square(props) {
     return (
-      <button className={`square`} onClick={(e) => {props.onClick(e)}}>
+      <button className="square" onClick={(e) => {props.onClick(e)}}>
           {props.value}
         </button>
     );
