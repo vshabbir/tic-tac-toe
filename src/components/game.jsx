@@ -29,7 +29,8 @@ class Game extends React.Component {
             step: 0,
             noOfGamesPlayed: 0,
             gameStarted: false,
-            noOfGamesDraw: 0
+            noOfGamesDraw: 0,
+            gameOver: false
         }
     }
 
@@ -40,11 +41,15 @@ class Game extends React.Component {
     restartGame = () => {
         this.#gameOver = false;
         if(this.state.gameStarted) this.setState({
-            ...this.#getInitialState, 
-            // noOfGamesPlayed: this.state.noOfGamesPlayed+1, 
-            // noOfGamesDraw: this.#noOfGamesDraw, 
-            gameStarted: true
+            ...this.#getInitialState,
+            gameStarted: false,
+            noOfGamesPlayed: this.#noOfGamePlayed,
+            noOfGamesDraw: this.#noOfGamesDraw
         });
+    }
+
+    pauseGame = () => {
+        this.setState({gameStarted: false});
     }
   
     handleClick = (i,e) => {
@@ -84,9 +89,11 @@ class Game extends React.Component {
     }
 
     undoMove = (move) => {
+        const usedSquare = this.state.usedSquares.slice(0, move);
         this.setState({
             step: move,
-            xIsNext: (move % 2) === 0
+            xIsNext: (move % 2) === 0,
+            usedSquares: usedSquare
         })
     }
   
@@ -94,16 +101,11 @@ class Game extends React.Component {
         this.autoPlayComp();
         if(this.#gameOver) {
             this.#gameOver = false;
-            this.setState({
-                ...this.#getInitialState, 
-                noOfGamesPlayed: this.state.noOfGamesPlayed+1, 
-                noOfGamesDraw: this.#noOfGamesDraw
-            });
+            this.#noOfGamePlayed = this.state.noOfGamesPlayed + 1
         }
     }
 
     render() {
-        // console.log(this.state);
         let currentSquare = this.state.history[this.state.step].squares;
         let status;
         let stats = gameService.identifyGameStat(currentSquare, this.state.usedSquares);
@@ -118,7 +120,7 @@ class Game extends React.Component {
         }
         return (
           <div className="game">
-            <Header onPlay={this.startGame} gameStarted={this.state.gameStarted} onRestart={this.restartGame}/>
+            <Header onPlay={this.startGame} gameStarted={this.state.gameStarted} onRestart={this.restartGame} onPause={this.pauseGame}/>
             <Setting compPlay={(e) => {this.playWithComp(e)}} isChecked={this.state.playWithComp}/>
             <div className="game-board">
                 <div className="status">
@@ -129,7 +131,7 @@ class Game extends React.Component {
                 <Board squares={currentSquare} onClick={this.handleClick}/>
                 </div>
             </div>
-            <GameHistory history={this.state.history} onClick={this.undoMove} compPlay={this.state.playWithComp} gameStats={this.state} noOfGamesPlayed={this.state.noOfGamesPlayed}/>
+            <GameHistory history={this.state.history} onClick={this.undoMove} gameStats={this.state} noOfGamesPlayed={this.state.noOfGamesPlayed}/>
           </div>
         );
     }
