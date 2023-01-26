@@ -56,7 +56,7 @@ class Game extends React.Component {
         if(!this.state.gameStarted) return;
         let history = this.state.history.slice(0, this.state.step + 1);
         let squares = history[history.length - 1].squares.slice();
-        if(gameService.calculateWinner(squares) || squares[i]) {
+        if(gameService.calculateWinner(squares).game_over || squares[i]) {
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
@@ -125,7 +125,7 @@ class Game extends React.Component {
                     {button}
                 </div>
                 <div className="square-board">
-                <Board squares={currentSquare} onClick={this.handleClick}/>
+                <Board squares={currentSquare} onClick={this.handleClick} uiProp={stats}/>
                 </div>
             </div>
             <GameHistory history={this.state.history} onClick={this.undoMove} gameStats={this.state} noOfGamesPlayed={this.state.noOfGamesPlayed}/>
