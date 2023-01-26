@@ -15,27 +15,30 @@ export const Setting = (props) => {
 };
 
 export function Square(props) {
+    function getApplicableClass() {
+      if(props.classManager.apply_class) {
+        return props.classManager.apply_to.includes(props.index)  ? props.classManager.class : '';
+      }
+    }
+
     return (
-      <div className={`square ${props.colorClass} horizontal-line`} onClick={(e) => {props.onClick(e)}}>
+      <div className="square" onClick={(e) => {props.onClick(e)}}>
+        {props.classManager.apply_class && <div className={getApplicableClass()}></div>}
         <span className="square-span">
           {props.value}
         </span>
       </div>
-      // <button className={`square ${props.colorClass}`} onClick={(e) => {props.onClick(e)}}>
-      //     {props.value}
-      // </button>
     );
 };
 
 export function Board(props) {
 
     const renderSquare = (i) => {
-      return <Square value={props.squares[i]} onClick={(e) => props.onClick(i, e)} />;
+      return <Square value={props.squares[i]} index={i} onClick={(e) => props.onClick(i, e)} classManager={props.uiProp}/>;
     }
   
     return (
       <div>
-        {/* <div><p>{this.whoIsPlaying}</p></div> */}
         <div className="board-row">
           {renderSquare(0)}
           {renderSquare(1)}
@@ -51,7 +54,6 @@ export function Board(props) {
           {renderSquare(7)}
           {renderSquare(8)}
         </div>
-        {/* <button onClick={() => this.restartGame()}>{button_text}</button> */}
       </div>
     );
 }

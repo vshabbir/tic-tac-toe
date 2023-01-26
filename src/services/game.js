@@ -1,21 +1,4 @@
 const gameService = {
-  calculateWinner: (squares) => {
-    const lines = [
-      [0,1,2],[3,4,5],[6,7,8],
-      [0,3,6],[1,4,7],[2,5,8],
-      [0,4,8],[2,4,6]
-    ]
-  
-    for (let i = 0; i < lines.length; i++) {
-      const [a,b,c] = lines[i];
-      if(squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a]
-      }
-    }
-  
-    return null;
-  },
-
   getUsableSquares: (usedSquares) => {
     let allSquares = Array.from(Array(9).keys())
     let usableSquares = allSquares.filter((i) => {return !usedSquares.includes(i)});
@@ -27,19 +10,69 @@ const gameService = {
   },
 
   identifyGameStat(squares, usedSquares) {
-    const game_stat = {stat: '', winner: '', game_over: false, flag: 'win'};
-    let winner = this.calculateWinner(squares);
-    if(winner) {
-      game_stat.stat = 'Winner : ';
-      game_stat.winner = winner;
-      game_stat.game_over = true;
-    }else if(this.isDraw(usedSquares)) {
-      game_stat.stat = 'Draw';
-      game_stat.game_over = true;
-      game_stat.flag = 'draw';
+    let win_obj = this.calculateWinner(squares);
+
+    if(!win_obj.game_over) {
+      if(this.isDraw(usedSquares)) {
+        win_obj.stat = 'Draw';
+        win_obj.game_over = true;
+        win_obj.flag = 'draw';
+        win_obj.apply_class = false;
+      }
     }
 
-    return game_stat;
+    return win_obj;
+  },
+
+  calculateWinner(squares) {
+    let win_positions = {
+      'v': [[0,3,6],[1,4,7],[2,5,8]],
+      'h': [[0,1,2],[3,4,5],[6,7,8]],
+      'br': [[0,4,8]], 'bl': [[2,4,6]]
+    }
+
+    let win_obj = {
+      class: '',
+      apply_to: [],
+      winner: '',
+      flag: 'win',
+      game_over: false,
+      stat: 'Winner : ',
+      apply_class: false
+    }
+
+    Object.keys(win_positions).forEach(element => {
+      for (let index = 0; index < win_positions[element].length; index++) {
+        const [a,b,c] = win_positions[element][index];
+        let css_class = 'line ';
+        if((squares[a] === squares[b] && squares[a] === squares[c]) && (squares[a] && squares[b] && squares[c])) {
+          switch (element) {
+              case 'v':
+                css_class += 'vertical-line';
+                break;
+              case 'h':
+                css_class += 'horizontal-line';
+                break
+              case 'br':
+                css_class += 'right-bottom-line';
+                break;
+              case 'bl':
+                css_class += 'left-bottom-line';
+                break;
+              default:
+                break;
+            }
+          win_obj.apply_to = [a,b,c];
+          win_obj.winner = squares[a];
+          win_obj.apply_class = true;
+          win_obj.class = css_class;
+          win_obj.game_over = true;
+          break;
+        }
+        }
+    });
+
+    return win_obj;
   }
 }
 
