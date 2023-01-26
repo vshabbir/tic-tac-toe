@@ -34,6 +34,12 @@ ol, ul {
   width: 80px;
 }
 
+.square .square-span {
+  vertical-align: middle;
+  position: relative;
+  top: 25%;
+}
+
 .color-x {
   color: coral;
 }
@@ -51,11 +57,7 @@ ol, ul {
 }
 
 .game {
-  /* display: flex;
-  flex-direction: row; */
   border: solid 1px;
-  /* justify-content: center; */
-  /* margin: 0 15% 5% 15%; */
 }
 
 .game-board {
@@ -70,7 +72,6 @@ ol, ul {
 
 .game-info {
   border: solid 1px;
-  /* margin-left: 20px; */
 }
 
 /* Header */
@@ -87,7 +88,6 @@ ol, ul {
 .header-container ul > li {
   display: table-cell;
   padding: 8px 15px 8px 15px;
-  /* border: solid; */
 }
 
 .header-container ul > li:hover {
@@ -104,7 +104,6 @@ ol, ul {
 /* Game Info */
 .game-info {
   list-style: none;
-  /* border: solid; */
   display: table;
   width: 100%;
 }
@@ -116,6 +115,53 @@ ol, ul {
 }
 
 .game-info .winner-info {
-  /* border: solid; */
   display: table-cell;
 }
+
+/* CSS to display winning lines */
+
+/* 
+  To use add the class next to square class. It will add line in the background.
+  Linear gradient works like a charm. And is easier to implement. Line can be created using this as well.
+  However i am not sure if this is supported by all browser. So we are using transform instead. 
+*/
+
+/* .square.right-bottom-line {
+  background: linear-gradient(45deg, 
+    rgba(255, 255, 255, 0) calc(50% - 1px), 
+    rgba(6, 5, 38, 0.882) calc(50%), 
+    rgba(0, 0, 0, 0) calc(50% + 1px)
+  );
+} */
+
+.line {
+  border-bottom: 1px solid rgb(45, 44, 44);
+  position: relative;
+}
+
+.square .vertical-line {
+  width: calc(100% * 1);
+  transform: rotate(90deg);
+  transform-origin: left;
+  left: 50%;
+}
+
+.square .horizontal-line {
+  width: calc(100% * 1);
+  position: relative;
+  top: 50%;
+}
+
+.square .right-bottom-line {
+  width: calc(100% * 1.42);
+  transform: rotate(45deg);
+  transform-origin: left;
+}
+
+.square .left-bottom-line {
+  width: calc(100% * 1.42);
+  transform: rotate(135deg);
+  transform-origin: 40px 17px;
+}
+
+/* CSS to display winning lines ends here */
