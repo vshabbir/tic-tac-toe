@@ -74,10 +74,6 @@ class Game extends React.Component {
         })
     }
   
-    // playWithComp(isChecked) {
-    //     this.setState({playWithComp: isChecked});
-    // }
-  
     autoPlayComp() {
         if(this.state.playWithComp === 'yes' && this.state.compTurn) {
             let compNum = gameService.getUsableSquares(this.state.usedSquares)
