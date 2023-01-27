@@ -1,12 +1,12 @@
 import React from "react";
-import { Setting, Board, GameHistory } from "./game-parts";
+import { Board, GameHistory } from "./game-parts";
 import gameService from "../services/game";
 import { Header } from "./layout/header";
+import Setting from "./setting";
 
 class Game extends React.Component {
     #gameOver = false;
     #noOfGamePlayed = 0;
-    #noOfGamesWon = 0;
     #noOfGamesDraw = 0;
 
     constructor(props) {
@@ -23,14 +23,16 @@ class Game extends React.Component {
                 }
             ],
             xIsNext: true,
-            playWithComp: false,
+            playWithComp: 'no',
             usedSquares: [],
             compTurn: false,
             step: 0,
             noOfGamesPlayed: 0,
             gameStarted: false,
             noOfGamesDraw: 0,
-            gameOver: false
+            gameOver: false,
+            player1: 'X',
+            settingsCompleted: false
         }
     }
 
@@ -44,7 +46,10 @@ class Game extends React.Component {
             ...this.#getInitialState,
             gameStarted: false,
             noOfGamesPlayed: this.#noOfGamePlayed,
-            noOfGamesDraw: this.#noOfGamesDraw
+            noOfGamesDraw: this.#noOfGamesDraw,
+            settingsCompleted: true,
+            player1: this.state.player1,
+            playWithComp: this.state.playWithComp
         });
     }
 
@@ -69,12 +74,12 @@ class Game extends React.Component {
         })
     }
   
-    playWithComp(isChecked) {
-        this.setState({playWithComp: isChecked});
-    }
+    // playWithComp(isChecked) {
+    //     this.setState({playWithComp: isChecked});
+    // }
   
     autoPlayComp() {
-        if(this.state.playWithComp && this.state.compTurn) {
+        if(this.state.playWithComp === 'yes' && this.state.compTurn) {
             let compNum = gameService.getUsableSquares(this.state.usedSquares)
             this.whoIsPlaying = 'Computer is playing';
             setTimeout(() => {
@@ -102,6 +107,22 @@ class Game extends React.Component {
         }
     }
 
+    onSaveSetting = (player1, pwc) => {
+        this.setState({
+            player1: player1,
+            playWithComp: pwc,
+            settingsCompleted: true,
+            xIsNext: player1 === 'X' ? true : false
+        });
+    }
+
+    onOpenSetting = () => {
+        console.log(this.state);
+        this.setState({
+            settingsCompleted: false
+        })
+    }
+
     render() {
         let currentSquare = this.state.history[this.state.step].squares;
         let status;
@@ -117,18 +138,26 @@ class Game extends React.Component {
         }
         return (
           <div className="game">
-            <Header onPlay={this.startGame} gameStarted={this.state.gameStarted} onRestart={this.restartGame} onPause={this.pauseGame}/>
-            <Setting compPlay={(e) => {this.playWithComp(e)}} isChecked={this.state.playWithComp}/>
-            <div className="game-board">
-                <div className="status">
-                    {status}
-                    {button}
-                </div>
-                <div className="square-board">
-                <Board squares={currentSquare} onClick={this.handleClick} uiProp={stats}/>
-                </div>
-            </div>
-            <GameHistory history={this.state.history} onClick={this.undoMove} gameStats={this.state} noOfGamesPlayed={this.state.noOfGamesPlayed}/>
+            <Header onPlay={this.startGame} gameStarted={this.state.gameStarted} onRestart={this.restartGame} onPause={this.pauseGame} onOpenSetting={this.onOpenSetting}/>
+            {
+                this.state.settingsCompleted ? (
+                    <>
+                        <div className="game-board">
+                            {
+                                this.state.gameStarted &&
+                                <div className="status">
+                                    {status}
+                                    {button}
+                                </div>
+                            }
+                            <div className="square-board">
+                            <Board squares={currentSquare} onClick={this.handleClick} uiProp={stats}/>
+                            </div>
+                        </div>
+                        <GameHistory history={this.state.history} onClick={this.undoMove} gameStats={this.state} noOfGamesPlayed={this.state.noOfGamesPlayed}/>
+                    </>
+                ) : (<Setting saveSetting={this.onSaveSetting} stateConfig={this.state} />)
+            }
           </div>
         );
     }

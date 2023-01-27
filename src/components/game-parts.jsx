@@ -1,19 +1,3 @@
-export const Setting = (props) => {
-    const onCompPlay = (e) => {
-        const {checked} = e.target;
-        props.compPlay(checked);
-      }
-    
-    return (
-        <div>
-        <div className="checkbox-div">
-            <input type={"checkbox"} onChange={onCompPlay} checked={props.isChecked}/>
-            <label>Play with computer</label>
-        </div>
-        </div>
-    )
-};
-
 export function Square(props) {
     function getApplicableClass() {
       if(props.classManager.apply_class) {
