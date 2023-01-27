@@ -1,7 +1,9 @@
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
+  /* font: 14px "Century Gothic", Futura, sans-serif; */
+  font: 16px "Papyrus", "Times New Roman", sans-serif;
   margin: 5px 30% 0px 30%;
-  /* background-color: rgba(214, 214, 220, 0.858); */
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 
 ol, ul {
@@ -165,3 +167,72 @@ ol, ul {
 }
 
 /* CSS to display winning lines ends here */
+
+/* CSS for settings */
+
+.setting-content {
+  margin: 2%;
+}
+
+.setting-note {
+  border-top: 1px inset;
+}
+
+.setting-note p {
+  margin: 2%;
+  font-family: "Times New Roman";
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.setting-box {
+  margin: 5px;
+  margin-bottom: 10px;
+  border: 1px outset;
+}
+
+.setting-head-label {
+  background-color: rgba(67, 108, 108, 0.273);
+  height: 25px;
+}
+
+.setting-head-label label {
+  margin: 10px;
+  font-size: 16px;
+  color: #663030;
+}
+
+div.setting-choice-radio {
+  margin: 10px;
+}
+
+.setting-choice-label {
+  font-size: 18px;
+  font-weight: 300;
+  margin-right: 20px;
+}
+
+.setting-button-holder {
+  margin: 5px;
+}
+
+.setting-button-holder button {
+  background-color: rgb(11 40 40 / 53%);
+  border: none;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.setting-button-holder button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/* CSS for settings ends here */

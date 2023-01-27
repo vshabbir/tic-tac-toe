@@ -8,6 +8,7 @@ export function Header(props) {
                     <li className="play-icon" onClick={() => props.onPlay()}>Play</li>
                 }
                 <li onClick={() => props.onRestart()}>Restart</li>
+                <li onClick={() => props.onOpenSetting()}>Setting</li>
                 {/* <li>Settings</li>
                 <li>Game History</li> */}
             </ul>
