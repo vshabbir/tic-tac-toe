@@ -235,4 +235,12 @@ div.setting-choice-radio {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+.setting-desc {
+  border-top: 1px solid;
+  font-size: 14px;
+}
+
+.setting-desc p {
+  margin: 2px;
+}
 /* CSS for settings ends here */

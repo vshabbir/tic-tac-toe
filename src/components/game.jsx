@@ -32,7 +32,8 @@ class Game extends React.Component {
             noOfGamesDraw: 0,
             gameOver: false,
             player1: 'X',
-            settingsCompleted: false
+            settingsCompleted: false,
+            allowUndo: 'no'
         }
     }
 
@@ -90,7 +91,7 @@ class Game extends React.Component {
         const usedSquare = this.state.usedSquares.slice(0, move);
         this.setState({
             step: move,
-            xIsNext: (move % 2) === 0,
+            xIsNext: (this.state.player1.toUpperCase() === 'X') ? ((move % 2) === 0) : (move % 2 !== 0),
             usedSquares: usedSquare
         })
     }
@@ -103,19 +104,23 @@ class Game extends React.Component {
         }
     }
 
-    onSaveSetting = (player1, pwc) => {
+    onSaveSetting = (player1, pwc, allowUndo) => {
         this.setState({
             player1: player1,
             playWithComp: pwc,
             settingsCompleted: true,
-            xIsNext: player1 === 'X' ? true : false
+            xIsNext: player1 === 'X' ? true : false,
+            allowUndo: allowUndo
         });
     }
 
     onOpenSetting = () => {
-        console.log(this.state);
         this.setState({
-            settingsCompleted: false
+            ...this.#getInitialState,
+            settingsCompleted: false,
+            player1: this.state.player1,
+            playWithComp: this.state.playWithComp,
+            allowUndo: this.state.allowUndo
         })
     }
 
@@ -134,7 +139,7 @@ class Game extends React.Component {
         }
         return (
           <div className="game">
-            <Header onPlay={this.startGame} gameStarted={this.state.gameStarted} onRestart={this.restartGame} onPause={this.pauseGame} onOpenSetting={this.onOpenSetting}/>
+            <Header onPlay={this.startGame} settingCompleted={this.state.settingsCompleted} gameStarted={this.state.gameStarted} onRestart={this.restartGame} onPause={this.pauseGame} onOpenSetting={this.onOpenSetting}/>
             {
                 this.state.settingsCompleted ? (
                     <>
@@ -150,7 +155,7 @@ class Game extends React.Component {
                             <Board squares={currentSquare} onClick={this.handleClick} uiProp={stats}/>
                             </div>
                         </div>
-                        <GameHistory history={this.state.history} onClick={this.undoMove} gameStats={this.state} noOfGamesPlayed={this.state.noOfGamesPlayed}/>
+                        <GameHistory onClick={this.undoMove} gameStats={this.state} noOfGamesPlayed={this.state.noOfGamesPlayed}/>
                     </>
                 ) : (<Setting saveSetting={this.onSaveSetting} stateConfig={this.state} />)
             }

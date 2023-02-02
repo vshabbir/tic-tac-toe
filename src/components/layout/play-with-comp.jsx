@@ -5,6 +5,7 @@ export function PlayWithComp(props) {
 
     function onSelectionChange(e) {
         setPwc(e.target.value);
+        props.onChange(e.target.value);
     }
 
     return (

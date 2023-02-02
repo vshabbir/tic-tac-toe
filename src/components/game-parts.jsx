@@ -43,16 +43,28 @@ export function Board(props) {
 }
 
 export function GameHistory(props) {
+    function getLastMove() {
+      return (props.gameStats.history.length - 2);
+    }
+
     return (
         <div className="game-info">
-            { (!props.compPlay && props.history.length > 1) &&
+            {
+              (props.gameStats.history.length > 1 && props.gameStats.allowUndo === 'yes') && 
+              <ol>
+                {
+                  <li><button onClick={() => props.onClick(getLastMove())}>Undo</button></li>
+                }
+              </ol>
+            }
+            {/* { (!props.compPlay && props.history.length > 1) &&
                 <ol>
                     {
                         props.history.map((square, move) => <li key={move}><button onClick={() => props.onClick(move)}>Go To {move ? move : 'Start'}</button></li>)
                     }
                 </ol>
 
-            }
+            } */}
             <div className="winner-info">
                 <div>
                     <ul>
