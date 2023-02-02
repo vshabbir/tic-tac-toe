@@ -6,7 +6,6 @@ export function Undo(props) {
 
     useEffect(() => {
         if(props.pwcValue === 'yes') {
-            console.log('in here');
             setAllowUndo('no');
         }
     }, [props.pwcValue]);
