@@ -139,6 +139,9 @@ class Game extends React.Component {
         }
         return (
           <div className="game">
+            <div className="game-head">
+                <h2>TiC - TaC - ToE</h2>
+            </div>
             <Header onPlay={this.startGame} settingCompleted={this.state.settingsCompleted} gameStarted={this.state.gameStarted} onRestart={this.restartGame} onPause={this.pauseGame} onOpenSetting={this.onOpenSetting}/>
             {
                 this.state.settingsCompleted ? (
@@ -155,7 +158,7 @@ class Game extends React.Component {
                             <Board squares={currentSquare} onClick={this.handleClick} uiProp={stats}/>
                             </div>
                         </div>
-                        <GameHistory onClick={this.undoMove} gameStats={this.state} noOfGamesPlayed={this.state.noOfGamesPlayed}/>
+                        <GameHistory onClick={this.undoMove} gameOver={this.#gameOver} gameStats={this.state} noOfGamesPlayed={this.state.noOfGamesPlayed}/>
                     </>
                 ) : (<Setting saveSetting={this.onSaveSetting} stateConfig={this.state} />)
             }

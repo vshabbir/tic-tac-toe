@@ -53,7 +53,7 @@ export function GameHistory(props) {
               (props.gameStats.history.length > 1 && props.gameStats.allowUndo === 'yes') && 
               <ol>
                 {
-                  <li><button onClick={() => props.onClick(getLastMove())}>Undo</button></li>
+                  <li><button onClick={() => props.onClick(getLastMove())} disabled={props.gameOver}>Undo</button></li>
                 }
               </ol>
             }
