@@ -50,7 +50,8 @@ class Game extends React.Component {
             noOfGamesDraw: this.#noOfGamesDraw,
             settingsCompleted: true,
             player1: this.state.player1,
-            playWithComp: this.state.playWithComp
+            playWithComp: this.state.playWithComp,
+            allowUndo: this.state.allowUndo
         });
     }
 
