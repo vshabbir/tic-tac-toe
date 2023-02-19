@@ -1,7 +1,9 @@
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 5px 30% 0px 30%;
-  /* background-color: rgba(214, 214, 220, 0.858); */
+  /* font: 14px "Century Gothic", Futura, sans-serif; */
+  font: 16px "Papyrus", "Times New Roman", sans-serif;
+  margin: 5px 35% 0px 35%;
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 
 ol, ul {
@@ -15,8 +17,9 @@ ol, ul {
 }
 
 .status {
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
   text-align: center;
+  padding-top: 25px;
 }
 
 .square {
@@ -61,13 +64,19 @@ ol, ul {
 }
 
 .game-board {
-  margin: 10px 0px 10px 0px;
+  /* background: repeating-linear-gradient(90deg,
+    rgba(108, 145, 132, 0.415),
+    black calc(50%),
+    rgba(88, 88, 166, 0.5)
+  ); */
+  background: rgba(219, 219, 220, 0.295);
 }
 
 .square-board {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding: 40px 0px 50px 0px;
 }
 
 .game-info {
@@ -76,8 +85,8 @@ ol, ul {
 
 /* Header */
 .header-container {
-  border: 1px solid;
-  background-color: rgba(53, 52, 154, 0.208);
+  padding-left: 17%;
+  background-color: rgba(50, 50, 98, 0.208);
 }
 
 .header-container ul {
@@ -165,3 +174,110 @@ ol, ul {
 }
 
 /* CSS to display winning lines ends here */
+
+/* CSS for settings */
+
+.setting-content {
+  margin: 2%;
+}
+
+.setting-note {
+  border-top: 1px inset;
+}
+
+.setting-note p {
+  margin: 2%;
+  font-family: "Times New Roman";
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.setting-box {
+  margin: 5px;
+  margin-bottom: 10px;
+  border: 1px outset;
+}
+
+.setting-head-label {
+  background-color: rgba(67, 108, 108, 0.273);
+  height: 25px;
+}
+
+.setting-head-label label {
+  margin: 10px;
+  font-size: 16px;
+  color: #663030;
+}
+
+div.setting-choice-radio {
+  margin: 10px;
+}
+
+.setting-choice-label {
+  font-size: 18px;
+  font-weight: 300;
+  margin-right: 20px;
+}
+
+.setting-button-holder {
+  margin: 5px;
+}
+
+.setting-button-holder button {
+  background-color: rgb(11 40 40 / 53%);
+  border: none;
+  color: white;
+  padding: 10px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.setting-button-holder button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.setting-desc {
+  border-top: 1px solid;
+  font-size: 14px;
+}
+
+.setting-desc p {
+  margin: 2px;
+}
+/* CSS for settings ends here */
+
+/* 
+  Css for head
+ */
+
+.game-head {
+  border-bottom: 1px outset;
+  border-top: 1px solid;
+  text-align: center;
+  font-size: 18px;
+  background: linear-gradient(180deg,
+    rgba(92, 33, 33, 0.434),
+    rgb(113, 113, 113),
+    rgba(61, 61, 179, 0.141)
+  );
+  background: -moz-linear-gradient(180deg,
+    rgba(92, 33, 33, 0.434),
+    rgb(113, 113, 113),
+    rgba(61, 61, 179, 0.141)
+  );
+  /* background-color: red; */
+}
+
+/* .game h2 {
+  border: 2px solid blue;
+} */
+
+/* 
+  Css for head ends here
+ */

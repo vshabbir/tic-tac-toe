@@ -1,19 +1,3 @@
-export const Setting = (props) => {
-    const onCompPlay = (e) => {
-        const {checked} = e.target;
-        props.compPlay(checked);
-      }
-    
-    return (
-        <div>
-        <div className="checkbox-div">
-            <input type={"checkbox"} onChange={onCompPlay} checked={props.isChecked}/>
-            <label>Play with computer</label>
-        </div>
-        </div>
-    )
-};
-
 export function Square(props) {
     function getApplicableClass() {
       if(props.classManager.apply_class) {
@@ -59,16 +43,28 @@ export function Board(props) {
 }
 
 export function GameHistory(props) {
+    function getLastMove() {
+      return (props.gameStats.history.length - 2);
+    }
+
     return (
         <div className="game-info">
-            { (!props.compPlay && props.history.length > 1) &&
+            {
+              (props.gameStats.history.length > 1 && props.gameStats.allowUndo === 'yes') && 
+              <ol>
+                {
+                  <li><button onClick={() => props.onClick(getLastMove())} disabled={props.gameOver}>Undo</button></li>
+                }
+              </ol>
+            }
+            {/* { (!props.compPlay && props.history.length > 1) &&
                 <ol>
                     {
                         props.history.map((square, move) => <li key={move}><button onClick={() => props.onClick(move)}>Go To {move ? move : 'Start'}</button></li>)
                     }
                 </ol>
 
-            }
+            } */}
             <div className="winner-info">
                 <div>
                     <ul>
